@@ -1,5 +1,13 @@
 class golang ( $version = "1.3.3" ) {
 
+  exec { "update-apt":
+    command => "apt-get update"
+  }
+  
+  exec { "install-prereq":
+    command => "apt-get install -y git subversion mercurial"
+  }
+
   exec { "download-golang":
     command => "/usr/bin/wget --no-check-certificate -O /usr/local/src/go$version.linux-amd64.tar.gz http://golang.org/dl/go$version.linux-amd64.tar.gz",
     creates => "/usr/local/src/go$version.linux-amd64.tar.gz"
